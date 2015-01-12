@@ -97,7 +97,7 @@ var PATTERN_SHARP = /##?/g,
 		_save: function (cb) {
 			var filename = this._filename,
 				data = this._data;
-			fs.writeFile(filename, JSON.stringify(data), cb );
+			fs.writeFile(filename, JSON.stringify(data,null,2), cb );
 		},
 
 		/**
