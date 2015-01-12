@@ -1,0 +1,27 @@
+{
+  "name": "mini-db",
+  "description": "A JSON based super lightweight database!!",
+  "version": "1.0.0",
+  "author": "Nanqiao Deng <nqdeng@gmail.com>",
+  "keywords": [
+    "json",
+    "jsonStorage",
+    "mongo"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tianmajs/json-storage.git"
+  },
+  "license": "MIT",
+  "main": "./index.js",
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "mini-util": "^1.0.0"
+  }
+}
