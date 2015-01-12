@@ -7,7 +7,7 @@ var assert = require('assert'),
 	storage = require('../index');
 
 
-describe('json storage api unit test', function () {
+describe('mini-db api unit test', function () {
 	var jsonfilePath = path.join(__dirname,'./json/simple.json') ,
 			db ;
 	before(function(){
@@ -39,22 +39,31 @@ describe('json storage api unit test', function () {
 			var list = db.select('people', '#==0');
 			assert.ok(list[0].name=='Jim');
 		});
+		it('select all by callback',function (done){
+			var list = db.select('people',function (err,list){
+				assert.equal(err,null);
+				assert.equal(list.length,1);
+				done();
+			});
+		});
   });
 
   describe('update api',function (){
   	it('should work',function (done){
-			db.update('people', { name: 'Kim'}, '$.age==27',function (){
+			db.update('people', { name: 'Kim'}, '$.age==27',function (err,updated){
 				var list = db.select('people','$.age==27');
 				assert.ok(list[0].name=='Kim');
+				assert.equal(list[0].name,updated[0].name);
 				done();
 			});
   	});
   });
   describe('remove api',function (){
   	it('should work',function (done){
-			db.remove('people','$.age==27',function (){
+			db.remove('people','$.age==27',function (err,removed){
 				var list = db.select('people','$.age==27');
 				assert.ok(list.length==0);
+				assert.equal(removed[0].age,27);
 				done();
 			});
   	});

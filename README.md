@@ -20,13 +20,17 @@ mini-db 提供了类似关系数据库的持久存储能力，以JSON格式将�
 ### insert
 
 ```
+var storage = require('mini-db');
 var db = storage('./storage/db.json');
-db.insert('people', { name: 'Jim', age: 27 });
+db.insert('people', { name: 'Jim', age: 27 },function(err,inserted){
+	if(!err) console.log(inserted);
+});
 ```
 
 ### select
 
 ```
+var storage = require('mini-db');
 var db = storage('./storage/db.json');
 db.select('people').forEach(function(item){
 	console.log(item.name,item.age);
@@ -36,29 +40,41 @@ db.select('people').forEach(function(item){
 ### select(filter)
 
 代码片段中，`$`表示值本身，`#`表示值在数组中的索引
+
 ```
+var storage = require('mini-db');
 var db = storage('./storage/db.json');
 db.select('people', '$.age==27').forEach(function (item) {
-    console.log(item.name + ':' + item.age);
+   console.log(item.name + ':' + item.age);
 });
-db.select('people', '#==0').forEach(function (item) {
-    console.log(item.name + ':' + item.age);
+db.select('people', '#==0',function(err,list){
+	if(err){return;}
+	list.forEach(function(item){
+		console.log(item.name,':',item.age);
+	});
 });
+
 
 ```
 
 ### update
 
 ```
+var storage = require('mini-db');
 var db = storage('./storage/db.json');
-db.update('people', { name: 'Kim', age: 27 }, '$.age==27');
+db.update('people', { name: 'Kim', age: 27 }, '$.age==27',function(err,updated){
+	if(!err) console.log(updated);
+});
 
 ```
 
 ### remove
 
 ```
+var storage = require('mini-db');
 var db = storage('./storage/db.json');
-db.remove('people', '#==0');
+db.remove('people', '#==0',function(err,removed){
+	if(!err) console.log(removed);
+});
 
 ```

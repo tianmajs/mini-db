@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/tianmajs/json-storage.git"
+    "url": "git://github.com/tianmajs/mini-db.git"
   },
   "license": "MIT",
   "main": "./index.js",
